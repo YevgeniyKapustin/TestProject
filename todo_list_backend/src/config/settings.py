@@ -41,10 +41,6 @@ class DjangoSettings(BaseSettings):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
-
-        'articles',
-        'about',
-        'mailing',
     ]
 
     MIDDLEWARE: list[str] = [
