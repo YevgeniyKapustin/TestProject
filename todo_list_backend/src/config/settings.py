@@ -41,6 +41,9 @@ class DjangoSettings(BaseSettings):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+
+        'user',
+        'task',
     ]
 
     MIDDLEWARE: list[str] = [
@@ -104,6 +107,8 @@ class DjangoSettings(BaseSettings):
     MEDIA_ROOT: str = os.path.join(BASE_DIR, 'media')
 
     DEFAULT_AUTO_FIELD: str = 'django.db.models.BigAutoField'
+
+    AUTH_USER_MODEL: str = 'user.CustomUser'
 
     def __get_databases(self) -> dict:
         return {
