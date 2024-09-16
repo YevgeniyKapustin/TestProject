@@ -27,11 +27,11 @@ class DjangoSettings(BaseSettings):
     SECRET_KEY: str
     DEBUG: bool
 
-    ALLOWED_HOSTS: List[str] = ['*']
+    ALLOWED_HOSTS: List[str]
     RATE_LIMIT: int
+    TIME_ZONE: str
 
     LANGUAGE_CODE: str = 'ru'
-    TIME_ZONE: str = 'America/Adak'
     USE_I18N: bool = True
     USE_TZ: bool = True
 
@@ -43,6 +43,8 @@ class DjangoSettings(BaseSettings):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
+        'rest_framework',
+        
         'user',
         'task',
     ]
