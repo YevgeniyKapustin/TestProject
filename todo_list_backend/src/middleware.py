@@ -1,6 +1,8 @@
 from django.core.cache import cache
 from django.http import HttpResponseForbidden
 
+from config import settings
+
 
 class RateLimitMiddleware:
     def __init__(self, get_response):
@@ -11,7 +13,7 @@ class RateLimitMiddleware:
         key = f'rate_limit:{ip}'
         requests = cache.get(key, 0)
 
-        if requests >= 15:
+        if requests >= settings.RATE_LIMIT:
             return HttpResponseForbidden('Too many requests')
 
         cache.set(key, requests + 1, timeout=60)

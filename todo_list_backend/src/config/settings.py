@@ -28,6 +28,7 @@ class DjangoSettings(BaseSettings):
     DEBUG: bool
 
     ALLOWED_HOSTS: List[str] = ['*']
+    RATE_LIMIT: int
 
     LANGUAGE_CODE: str = 'ru'
     TIME_ZONE: str = 'America/Adak'
