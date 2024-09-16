@@ -54,6 +54,8 @@ class DjangoSettings(BaseSettings):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+        'middleware.RateLimitMiddleware'
     ]
 
     ROOT_URLCONF: str = 'config.urls'
@@ -98,6 +100,13 @@ class DjangoSettings(BaseSettings):
             'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
         },
     ]
+
+    RQ_QUEUES: dict = {
+        'default': {
+            'URL': 'redis://localhost:6379/0',
+            'DEFAULT_TIMEOUT': 360,
+        }
+    }
 
     STATIC_URL: str = 'static/'
     STATIC_ROOT: str = os.path.join(BASE_DIR, 'src')
