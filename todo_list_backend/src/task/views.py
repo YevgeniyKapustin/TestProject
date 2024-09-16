@@ -67,7 +67,7 @@ class TaskAPIView(APIView):
     serializer_class = TaskSerializer
 
     def get(self, request, *args, **kwargs):
-        tasks = Task.objects.filter(user=request.user.id)
+        tasks = Task.objects.select_related('category').filter(user=request.user.id)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -125,7 +125,7 @@ class TaskAllAPIView(generics.ListAPIView):
     serializer_class = TaskSerializer
 
     def get(self, request, *args, **kwargs):
-        tasks = Task.objects.filter(user=request.user.id)
+        tasks = Task.objects.select_related('category').filter(user=request.user.id)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -135,7 +135,7 @@ class TaskAllByCategoryAPIView(APIView):
     serializer_class = TaskSerializer
 
     def get(self, request, category_id, *args, **kwargs):
-        tasks = Task.objects.filter(
+        tasks = Task.objects.select_related('category').filter(
             user=request.user.id,
             category=category_id
         )
