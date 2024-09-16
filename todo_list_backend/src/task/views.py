@@ -62,7 +62,7 @@ class CategoryAllAPIView(generics.ListAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class TaskAPIView(generics.RetrieveUpdateDestroyAPIView):
+class TaskAPIView(APIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -70,6 +70,54 @@ class TaskAPIView(generics.RetrieveUpdateDestroyAPIView):
         tasks = Task.objects.filter(user=request.user.id)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': request.data.get('title'),
+            'content': request.data.get('content'),
+            'due_date': request.data.get('due_date'),
+            'category': request.data.get('category'),
+            'user': request.data.get('category')
+        }
+        serializer = CategorySerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, task_id, *args, **kwargs):
+        task = self.get(task_id, request.user.id)
+        if not task:
+            return Response(
+                {'res': 'Object does not exists'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        data = {
+            'title': request.data.get('title'),
+            'content': request.data.get('content'),
+            'due_date': request.data.get('due_date'),
+            'category': request.data.get('category'),
+            'user': request.data.get('category')
+        }
+        serializer = CategorySerializer(instance=task, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, category_id, *args, **kwargs):
+        task = self.get(category_id, request.user.id)
+        if not task:
+            return Response(
+                {"res": "Object does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        task.delete()
+        return Response(
+            {"res": "Object deleted!"},
+            status=status.HTTP_200_OK
+        )
 
 
 class TaskAllAPIView(generics.ListAPIView):
