@@ -41,11 +41,9 @@ class Task(models.Model):
     id: str = models.CharField(max_length=160, primary_key=True)
     title: str = models.CharField(max_length=250, verbose_name='Заголовок')
     content: str = models.TextField(blank=True, verbose_name='Текст')
-    created: datetime = models.DateField(
-        default=timezone.now().strftime("%Y-%m-%d")
-    )
-    due_date: datetime = models.DateField(
-        default=timezone.now().strftime("%Y-%m-%d"),
+    created: datetime = models.DateTimeField(default=timezone.now)
+    due_date: datetime = models.DateTimeField(
+        default=timezone.now,
         verbose_name='Дата завершения задачи'
     )
     category: Category = models.ForeignKey(

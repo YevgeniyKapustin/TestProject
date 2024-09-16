@@ -3,4 +3,9 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=150, unique=True, primary_key=True)
+    id = models.CharField(max_length=150, unique=True, primary_key=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.id = self.username
+        super().save(*args, **kwargs)
