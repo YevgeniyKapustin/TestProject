@@ -4,37 +4,33 @@ services:
   db:
     image: postgres:15
     env_file:
-      - .env
-    container_name:
-      todo_list_pg
+      - src/.env
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 
-  todo_list_backend:
+  app:
     build:
-      context: ./todo_list_backend
+      context: .
     command: sh -c "gunicorn --bind 0.0.0.0:8000 config.wsgi"
-    container_name:
-      todo_list_backend
     depends_on:
       - db
     env_file:
-      - .env
+      - src/.env
     ports:
       - '8000:8000'
 
   nginx:
     image: nginx:1.19.8
-    container_name:
-      todo_list_nginx
     depends_on:
-     - todo_list_backend
+     - app
     ports:
       - '80:80'
     volumes:
+      - static_data:/var/www/html/static
       - ./nginx-conf.d:/etc/nginx/conf.d
 
 volumes:
   pgdata:
+  static_data:

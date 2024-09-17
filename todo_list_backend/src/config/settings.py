@@ -25,7 +25,7 @@ class DjangoSettings(BaseSettings):
         self.DATABASES: dict = self.__get_databases()
         self.SIMPLE_JWT: dict = self.__set_settings_for_jwt()
 
-    BASE_DIR: Path = Path(__file__).resolve().parent.parent
+    BASE_DIR: Path = Path(__file__).resolve().parent
     SECRET_KEY: str
     DEBUG: bool
 
@@ -84,12 +84,12 @@ class DjangoSettings(BaseSettings):
 
     WSGI_APPLICATION: str = 'config.wsgi.application'
 
-    DEFAULT_ENGINE: str
-    DEFAULT_NAME: str
-    DEFAULT_USER: str
-    DEFAULT_PASSWORD: str
-    DEFAULT_HOST: str
-    DEFAULT_PORT: str
+    POSTGRES_ENGINE: str
+    POSTGRES_NAME: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_HOST: str
+    POSTGRES_PORT: str
     DATABASES: dict = {'default': None}
 
     AUTH_PASSWORD_VALIDATORS: list[dict] = [
@@ -139,12 +139,12 @@ class DjangoSettings(BaseSettings):
     def __get_databases(self) -> dict:
         return {
             'default': {
-                'ENGINE': self.DEFAULT_ENGINE,
-                'NAME': self.DEFAULT_NAME,
-                'USER': self.DEFAULT_USER,
-                'PASSWORD': self.DEFAULT_PASSWORD,
-                'HOST': self.DEFAULT_HOST,
-                'PORT': self.DEFAULT_PORT
+                'ENGINE': self.POSTGRES_ENGINE,
+                'NAME': self.POSTGRES_NAME,
+                'USER': self.POSTGRES_USER,
+                'PASSWORD': self.POSTGRES_PASSWORD,
+                'HOST': self.POSTGRES_HOST,
+                'PORT': self.POSTGRES_PORT
             }
         }
 
