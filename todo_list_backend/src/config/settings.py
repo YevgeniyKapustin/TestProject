@@ -85,7 +85,7 @@ class DjangoSettings(BaseSettings):
     WSGI_APPLICATION: str = 'config.wsgi.application'
 
     POSTGRES_ENGINE: str
-    POSTGRES_NAME: str
+    POSTGRES_DB: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
@@ -140,7 +140,7 @@ class DjangoSettings(BaseSettings):
         return {
             'default': {
                 'ENGINE': self.POSTGRES_ENGINE,
-                'NAME': self.POSTGRES_NAME,
+                'NAME': self.POSTGRES_DB,
                 'USER': self.POSTGRES_USER,
                 'PASSWORD': self.POSTGRES_PASSWORD,
                 'HOST': self.POSTGRES_HOST,

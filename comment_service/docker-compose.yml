@@ -13,7 +13,6 @@ services:
   app:
     build:
       context: .
-    command: sh -c "gunicorn -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8040 main:app"
     depends_on:
       - db
     env_file:

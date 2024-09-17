@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python ./src/manage.py migrate
+python /app/src/manage.py migrate

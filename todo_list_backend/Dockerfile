@@ -13,7 +13,8 @@ RUN poetry config virtualenvs.create false &&  \
 
 COPY . .
 
-CMD chmod a+x scripts/*sh &&  \
-    /app/scripts/run_migration.sh
-
 WORKDIR /app/src
+
+CMD chmod a+x /app/scripts/*sh &&  \
+    /app/scripts/run_migration.sh &&  \
+    /app/scripts/run_gunicorn.sh
