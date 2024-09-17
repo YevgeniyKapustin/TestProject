@@ -16,6 +16,8 @@ services:
     command: sh -c "gunicorn --bind 0.0.0.0:8000 config.wsgi"
     depends_on:
       - db
+    volumes:
+      - static_data:/app/src/static
     env_file:
       - src/.env
     ports:
@@ -28,7 +30,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - static_data:/var/www/html/static
+      - static_data:/var/www/static
       - ./nginx-conf.d:/etc/nginx/conf.d
 
 volumes:

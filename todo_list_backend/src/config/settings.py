@@ -25,7 +25,7 @@ class DjangoSettings(BaseSettings):
         self.DATABASES: dict = self.__get_databases()
         self.SIMPLE_JWT: dict = self.__set_settings_for_jwt()
 
-    BASE_DIR: Path = Path(__file__).resolve().parent
+    BASE_DIR: Path = Path(__file__).resolve().parent.parent
     SECRET_KEY: str
     DEBUG: bool
 
@@ -126,8 +126,8 @@ class DjangoSettings(BaseSettings):
     SIMPLE_JWT: dict = {}
 
     STATIC_URL: str = 'static/'
-    STATIC_ROOT: str = os.path.join(BASE_DIR, 'src')
-    STATICFILES_DIRS: list = [os.path.join(BASE_DIR, 'static')]
+    STATIC_ROOT: str = os.path.join(BASE_DIR, 'static')
+    STATICFILES_DIRS: list = [os.path.join(BASE_DIR, 'src/static')]
 
     MEDIA_URL: str = 'media/'
     MEDIA_ROOT: str = os.path.join(BASE_DIR, 'media')
