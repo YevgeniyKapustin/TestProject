@@ -8,11 +8,11 @@ class Settings(BaseSettings):
         self.POSTGRES_URL: str = self.__get_postgres_dsn()
 
     # Postgres
-    DEFAULT_USER: str
-    DEFAULT_PASSWORD: str
-    DEFAULT_HOST: str
-    DEFAULT_PORT: str
-    DEFAULT_NAME: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_HOST: str
+    POSTGRES_PORT: str
+    POSTGRES_NAME: str
     POSTGRES_URL: str | None = None
 
     # CORS
@@ -20,8 +20,8 @@ class Settings(BaseSettings):
 
     def __get_postgres_dsn(self) -> str:
         return (
-            f'postgresql://{self.DEFAULT_USER}:{self.DEFAULT_PASSWORD}@'
-            f'{self.DEFAULT_HOST}/{self.DEFAULT_NAME}'
+            f'postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@'
+            f'{self.POSTGRES_HOST}/{self.POSTGRES_NAME}'
         )
 
     class Config:

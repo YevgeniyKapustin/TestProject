@@ -8,31 +8,27 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5434:5434'
 
   app:
     build:
       context: .
-    command: sh -c "gunicorn --bind 0.0.0.0:8000 config.wsgi"
+    command: sh -c "gunicorn -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8040 main:app"
     depends_on:
       - db
-    volumes:
-      - static_data:/app/src/static
     env_file:
       - src/.env
     ports:
-      - '8000:8000'
+      - '8040:8040'
 
   nginx:
     image: nginx:1.19.8
     depends_on:
      - app
     ports:
-      - '80:80'
+      - '8080:8080'
     volumes:
-      - static_data:/var/www/static
       - ./nginx-conf.d:/etc/nginx/conf.d
 
 volumes:
   pgdata:
-  static_data:
