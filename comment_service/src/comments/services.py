@@ -1,4 +1,4 @@
-from sqlalchemy import select, or_, and_
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from comments.models import Comment
@@ -37,8 +37,8 @@ class CommentCRUD(object):
                 select(Comment).
                 where(Comment.task_id == self.__task_id)
             )
-        result = session.execute(query)
-        return list(result.scalars().all())
+            result = session.execute(query)
+            return list(result.scalars().all())
 
     async def update(self, new_obj: dict, session: AsyncSession) -> bool:
         """Обновление объекта в базы данных."""

@@ -15,6 +15,7 @@ fastapi-cache2 = "^0.2.2"
 redis = "^5.0.8"
 psycopg2-binary = "^2.9.9"
 gunicorn = "^23.0.0"
+requests = "^2.32.3"
 
 
 [build-system]
