@@ -17,6 +17,7 @@ class Settings(BaseSettings):
 
     # CORS
     ALLOWED_HOSTS: list[str]
+    BACKEND_URL: str = 'http://localhost'
 
     def __get_postgres_dsn(self) -> str:
         return (
