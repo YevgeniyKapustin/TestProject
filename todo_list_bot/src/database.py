@@ -1,5 +1,4 @@
 """Сбор метаданных и создание сессии"""
-from contextlib import contextmanager
 from typing import Generator
 
 from sqlalchemy import Column, Integer, create_engine, Engine
@@ -27,7 +26,6 @@ engine: Engine = create_engine(
 session_maker = sessionmaker(engine, expire_on_commit=False)
 
 
-@contextmanager
 def get_db() -> Generator[Session, None, None]:
     session: Session = sessionmaker(
         autocommit=False,
